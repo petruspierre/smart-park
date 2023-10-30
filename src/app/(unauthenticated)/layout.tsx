@@ -19,7 +19,7 @@ export default function UnauthenticatedPage({
           />
         </Link>
         
-        <div>
+        <div className="w-full max-w-md">
           {children}
         </div>
       </div>
