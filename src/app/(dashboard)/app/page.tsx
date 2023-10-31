@@ -13,23 +13,17 @@ export default function AppHome() {
           <ButtonCard
             icon={CalendarPlus}
             label="Nova reserva"
-            onClick={() => {
-              redirect('/reservation')
-            }}
+            href="/app/reservation"
           />
           <ButtonCard
             icon={Cable}
             label="Suporte"
-            onClick={() => {
-              redirect('/support')
-            }}
+            href="/app/support"
           />
           <ButtonCard
             icon={UserCircle2}
             label="Meus dados"
-            onClick={() => {
-              redirect('/profile')
-            }}
+            href="/app/profile"
           />
         </div>
       </section>
