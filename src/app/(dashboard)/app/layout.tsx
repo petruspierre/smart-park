@@ -18,7 +18,9 @@ export default function DashboardPages({
         </Link>
       </header>
       <main className="flex flex-1 w-full max-w-5xl mx-auto px-4">
-        {children}
+        <div className="w-full mt-4">
+          {children}
+        </div>
       </main>
     </div>
   );

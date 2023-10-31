@@ -4,7 +4,7 @@ import { Mail, Phone } from "lucide-react";
 
 export default function Support() {
   return (
-    <div className="w-full mt-4">
+    <div className="w-full">
       <h1 className="font-bold text-2xl">Suporte</h1>
 
       <section className="w-full my-6">
@@ -19,7 +19,7 @@ export default function Support() {
           </AccordionItem>
 
           <AccordionItem value="item-2">
-            <AccordionTrigger>Integer at tincidunt arcu, vitae sollicitudin tortor</AccordionTrigger>
+            <AccordionTrigger>Integer at tincidunt arcu</AccordionTrigger>
             <AccordionContent>
               Sed cursus est vel augue dignissim, vitae malesuada arcu eleifend. Nunc at dolor sit amet augue venenatis maximus in sed ligula.
             </AccordionContent>
