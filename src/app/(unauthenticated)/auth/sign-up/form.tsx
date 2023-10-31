@@ -23,13 +23,6 @@ const signupFormSchema = z.object({
     .string({
       required_error: "O sobrenome é obrigatório.",
     }),
-  cpf: z
-    .string({
-      required_error: "O CPF é obrigatório.",
-    })
-    .regex(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, {
-      message: "O CPF informado não é válido.",
-    }),
   email: z
   .string({
     required_error: "O e-mail é obrigatório.",
@@ -65,7 +58,7 @@ export function SignUpForm() {
             name="firstName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>E-mail</FormLabel>
+                <FormLabel>Nome</FormLabel>
                 <FormControl>
                   <Input placeholder="Thyago" {...field} />
                 </FormControl>
@@ -88,20 +81,6 @@ export function SignUpForm() {
             )}
           />
         </div>
-
-        <FormField
-            control={form.control}
-            name="cpf"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>CPF</FormLabel>
-                <FormControl>
-                  <Input placeholder="XXX.XXX.XXX-XX" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
         <FormField
           control={form.control}
