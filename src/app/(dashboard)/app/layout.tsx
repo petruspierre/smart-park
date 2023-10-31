@@ -1,10 +1,22 @@
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
+import { cookies } from 'next/headers'
+import { redirect } from "next/navigation";
 
-export default function DashboardPages({
+export default async function DashboardPages({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const supabase = await createServerComponentClient({ cookies })
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+
+  if (!session) {
+    redirect('/')
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <header className="flex items-center justify-center border-b p-4">

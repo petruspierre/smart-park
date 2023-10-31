@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 const loginFormSchema = z.object({
   email: z
@@ -34,12 +36,47 @@ const loginFormSchema = z.object({
 type LoginFormSchemaType = z.infer<typeof loginFormSchema>;
 
 export function LoginForm() {
+  const { toast } = useToast();
+  const router = useRouter();
   const form = useForm<LoginFormSchemaType>({
     resolver: zodResolver(loginFormSchema as any),
   });
 
-  function onSubmit(values: z.infer<typeof loginFormSchema>) {
-    console.log(values);
+  async function onSubmit({
+    email,
+    password,
+  }: z.infer<typeof loginFormSchema>) {
+    try {
+      const response = await fetch("/auth/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        toast({
+          title: "Erro ao fazer login",
+          description: "Ocorreu um erro ao fazer login, tente novamente.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      router.refresh();
+    } catch (error) {
+      toast({
+        title: "Erro ao fazer login",
+        description: "Ocorreu um erro ao fazer login, tente novamente.",
+        variant: "destructive",
+      });
+    }
   }
 
   return (
@@ -74,7 +111,9 @@ export function LoginForm() {
         />
 
         <div className="flex justify-center w-full pt-6">
-          <Button className="w-full" type="submit">Entrar</Button>
+          <Button className="w-full" type="submit" disabled={form.formState.isSubmitting}>
+            Entrar
+          </Button>
         </div>
       </form>
     </Form>
